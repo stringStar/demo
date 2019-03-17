@@ -1,0 +1,21 @@
+首页后端提供接口
+1)http://localhost/finmarket_product
+{loan:[{productId:0, productName:'马上金融', productImg:'www', productPers:3456, productUrl:'www', productDec:'有房可申请', productFeature:'500-50000元', productCue:'免息', productOrder:0}, {}], card:[{productId:0, productName:'中信银行i白金卡', productFeature:'买一送一，首刷有礼', productImg:'www', productUrl:'www', productOrder:0}]}
+
+2)http://localhost/finmarket_topimg
+[{type:'loan', productImg:'www', productUrl:'www'}, {}]
+
+
+热门贷款提供接口
+http://localhost/finmarket/loanlist?num=9
+[{productId:0, productName:'马上金融', productImg:'www', productPers:3456, productUrl:'www', productDec:'有房可申请', productFeatures:'500-50000元', productCue:'免息', productOrder:0}]
+
+热门信用卡提供接口
+http://localhost/finmarket/cardlist?num=9
+[{productId:0, productName:'中信银行i白金卡', productReason:'买一送一，首刷有礼', productImg:'www', productUrl:'www', productOrder:0}]
+
+
+返回接口：
+{ip:'', type:'loan', productId:0, date:''}
+
+============================================

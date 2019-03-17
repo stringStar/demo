@@ -1,0 +1,13 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8" />
+<% if (context.title != null) { %>
+  <title><%= context.title %></title>
+<% } %>
+</head>
+<body>
+
+<div id="<%= context.config.mountElementId %>"></div>
+</body>
+</html>
