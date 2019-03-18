@@ -80,28 +80,25 @@ export default class Home extends Component {
           <div className={styles.formItem}>
             <label>学员姓名</label>
             <InputItem
-              {...getFieldProps("inputtitle2")}
+              {...getFieldProps("userName")}
               placeholder="请输入学员名"
             />
           </div>
           <div className={styles.formItem}>
             <label>公司</label>
             <InputItem
-              {...getFieldProps("inputtitle2")}
+              {...getFieldProps("companyName")}
               placeholder="请输入公司名"
             />
           </div>
           <div className={styles.formItem}>
             <label>学员手机</label>
-            <InputItem
-              {...getFieldProps("inputtitle2")}
-              placeholder="请输入手机号"
-            />
+            <InputItem {...getFieldProps("phone")} placeholder="请输入手机号" />
           </div>
           <div className={styles.formItem}>
             <label>学历</label>
             <InputItem
-              {...getFieldProps("inputtitle2")}
+              {...getFieldProps("education")}
               placeholder="请输入学历"
             />
           </div>
