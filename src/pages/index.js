@@ -2,9 +2,8 @@ import styles from "./index.less";
 import router from "umi/router";
 import React, { Component } from "react";
 import Link from "umi/link";
-import { List, InputItem, WhiteSpace, Checkbox } from "antd-mobile";
+import { List, InputItem, Button, Checkbox } from "antd-mobile";
 import { createForm } from "rc-form";
-import moment from "moment";
 
 import * as API from "../service";
 import styels from "./index.less";
@@ -67,7 +66,7 @@ export default class Home extends Component {
     const { getFieldProps } = this.props.form;
     const { courseList } = this.state;
     return (
-      <div>
+      <div className={styles.index}>
         <div className={styles.head}>
           <div className={styles.logo}>
             <img src="https://pub-files.jinshuju.net/hi/20180426153519_0b9af4@himlarge" />
@@ -102,7 +101,7 @@ export default class Home extends Component {
               placeholder="请输入学历"
             />
           </div>
-          <div>报名课程</div>
+          <div className={styles.courseTitle}>报名课程</div>
           <div className={styles.courseList}>
             {courseList &&
               courseList.map(i => (
@@ -115,6 +114,9 @@ export default class Home extends Component {
                 </CheckboxItem>
               ))}
           </div>
+        </div>
+        <div className={styles.sumbit}>
+          <Button className={styles.sumbitBtn}>提交</Button>
         </div>
       </div>
     );

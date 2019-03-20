@@ -1,19 +1,23 @@
 html,
 body,
 #root {
-  height: 100%;
-  font-family: 'Microsoft YaHei', 'Open Sans', 'PingFang SC', 'Helvetica Neue', 'Hiragino Sans GB',
-    'WenQuanYi Micro Hei', Arial, sans-serif;
+    height: 100%;
+    font-family: 'Microsoft YaHei', 'Open Sans', 'PingFang SC', 'Helvetica Neue', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', Arial, sans-serif;
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body {
-  margin: 0;
+    margin: 0;
+    background: #fff;
+}
+
+h1 {
+    margin: 0;
 }
 
 .am-toast {
-  font-size: 28px;
+    font-size: 28px;
 }

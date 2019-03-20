@@ -33,7 +33,7 @@ let routes = [
         "_title_default": "小金桔"
       },
       {
-        "component": () => React.createElement(require('D:/worker/baomingqudao/node_modules/_umi-build-dev@1.7.0@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: false }),
+        "component": () => React.createElement(require('/Users/app/erxuanUi/demo/node_modules/_umi-build-dev@1.5.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: false }),
         "_title": "小金桔",
         "_title_default": "小金桔"
       }
@@ -42,7 +42,7 @@ let routes = [
     "_title_default": "小金桔"
   },
   {
-    "component": () => React.createElement(require('D:/worker/baomingqudao/node_modules/_umi-build-dev@1.7.0@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: false }),
+    "component": () => React.createElement(require('/Users/app/erxuanUi/demo/node_modules/_umi-build-dev@1.5.6@umi-build-dev/lib/plugins/404/NotFound.js').default, { pagesPath: 'src/pages', hasRoutesInConfig: false }),
     "_title": "小金桔",
     "_title_default": "小金桔"
   }
