@@ -2,11 +2,10 @@ import styles from "./index.less";
 import router from "umi/router";
 import React, { Component } from "react";
 import Link from "umi/link";
-import { List, InputItem, Button, Checkbox } from "antd-mobile";
+import { Picker, InputItem, Button, Checkbox, List, Toast } from "antd-mobile";
 import { createForm } from "rc-form";
 
 import * as API from "../service";
-import styels from "./index.less";
 
 const CheckboxItem = Checkbox.CheckboxItem;
 
@@ -16,11 +15,14 @@ export default class Home extends Component {
     card: [],
     loan: [],
     courseList: [
-      { id: "1", name: "DIN EN ISO9712 + SNT MT Level 2" },
-      { id: "2", name: "DIN EN ISO9712 + SNT MT Level 3" },
-      { id: "3", name: "DIN EN ISO9712 + SNT MT Level 4" },
-      { id: "4", name: "DIN EN ISO9712 + SNT MT Level 5" }
-    ]
+      { id: "1", name: "课程1" },
+      { id: "2", name: "课程2" },
+      { id: "3", name: "课程3" },
+      { id: "4", name: "课程4" },
+      { id: "5", name: "课程5" },
+      { id: "6", name: "课程6" }
+    ],
+    course: []
   };
   componentDidMount() {
     // API.getTopImg().then(res => {
@@ -44,13 +46,6 @@ export default class Home extends Component {
     // });
   }
 
-  goToLoan = () => {
-    router.push("/loan");
-  };
-  goToCard = () => {
-    router.push("/card");
-  };
-
   onChange = (e, id) => {
     const { courseList } = this.state;
     const check = e.target.checked;
@@ -62,9 +57,48 @@ export default class Home extends Component {
     }));
   };
 
+  submit = () => {
+    this.props.form.validateFields((error, value) => {
+      console.log(error, value);
+      if (!error) {
+        const { courseList } = this.state;
+        const course = courseList.filter(v => v.checked).map(v => v.name);
+        if (course.length === 0) {
+          Toast.info("请选择课程", 2, () => {}, false);
+        } else {
+          API.enroll({
+            ...value,
+            edu: value.edu.join(""),
+            course
+          }).then(
+            res => {
+              router.push("/success");
+            },
+            rej => {
+              Toast.info(rej.message, 2, () => {}, false);
+            }
+          );
+        }
+      } else {
+        for (var i in error) {
+          Toast.info(error[i].errors[0].message, 2, () => {}, false);
+          return false;
+        }
+      }
+    });
+  };
+
   render() {
     const { getFieldProps } = this.props.form;
     const { courseList } = this.state;
+    const eduList = [
+      { value: "专科", label: "专科" },
+      { value: "本科", label: "本科" },
+      { value: "硕士", label: "硕士" },
+      { value: "博士", label: "博士" },
+      { value: "其他", label: "其他" }
+    ];
+
     return (
       <div className={styles.index}>
         <div className={styles.head}>
@@ -79,27 +113,51 @@ export default class Home extends Component {
           <div className={styles.formItem}>
             <label>学员姓名</label>
             <InputItem
-              {...getFieldProps("userName")}
+              {...getFieldProps("name", {
+                rules: [{ required: true, message: "请输入姓名" }]
+              })}
               placeholder="请输入学员名"
+              clear
             />
           </div>
           <div className={styles.formItem}>
             <label>公司</label>
             <InputItem
-              {...getFieldProps("companyName")}
+              {...getFieldProps("company", {
+                rules: [{ required: true, message: "请输入公司名" }]
+              })}
+              clear
               placeholder="请输入公司名"
             />
           </div>
           <div className={styles.formItem}>
             <label>学员手机</label>
-            <InputItem {...getFieldProps("phone")} placeholder="请输入手机号" />
+            <InputItem
+              clear
+              {...getFieldProps("mobile", {
+                rules: [{ required: true, message: "请输入手机号" }]
+              })}
+              placeholder="请输入手机号"
+            />
           </div>
+
           <div className={styles.formItem}>
             <label>学历</label>
-            <InputItem
-              {...getFieldProps("education")}
-              placeholder="请输入学历"
-            />
+            <div className={styles.eduList}>
+              <Picker
+                data={eduList}
+                extra="请选择"
+                title="选择学历"
+                cols={1}
+                {...getFieldProps("edu", {
+                  rules: [{ required: true, message: "请选择学历" }]
+                })}
+                onOk={e => console.log("ok", e)}
+                onDismiss={e => console.log("dismiss", e)}
+              >
+                <List.Item arrow="horizontal">学历</List.Item>
+              </Picker>
+            </div>
           </div>
           <div className={styles.courseTitle}>报名课程</div>
           <div className={styles.courseList}>
@@ -116,7 +174,9 @@ export default class Home extends Component {
           </div>
         </div>
         <div className={styles.sumbit}>
-          <Button className={styles.sumbitBtn}>提交</Button>
+          <Button onClick={this.submit} className={styles.sumbitBtn}>
+            提交
+          </Button>
         </div>
       </div>
     );

@@ -19,16 +19,9 @@ let routes = [
         "_title_default": "小金桔"
       },
       {
-        "path": "/card",
+        "path": "/success",
         "exact": true,
-        "component": require('../card.js').default,
-        "_title": "小金桔",
-        "_title_default": "小金桔"
-      },
-      {
-        "path": "/loan",
-        "exact": true,
-        "component": require('../loan.js').default,
+        "component": require('../success.js').default,
         "_title": "小金桔",
         "_title_default": "小金桔"
       },
