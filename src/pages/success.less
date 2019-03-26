@@ -1,6 +1,6 @@
 .spe {
-    width: 60px;
-    height: 60px;
+    width: 120px;
+    height: 120px;
 }
 
 .index {
@@ -10,32 +10,38 @@
 }
 
 :global {
-    .am-result {
-        padding: 100px 0;
-        .am-result-title {
-            font-size: 28px;
-            padding: 30px 0 18px 0;
-            margin-left: 15px;
-        }
-        .am-result-message {
-            font-size: 24px;
-        }
+
+    //     .am-result {
+    //         padding: 100px 0;
+    //         .am-result-title {
+    //             font-size: 28px;
+    //             padding: 30px 0 18px 0;
+    //             margin-left: 15px;
+    //         }
+    .am-result-message {
+        font-size: 28px !important;
     }
+
+    //     }
 }
 
 .head {
-    height: 380px;
+
+    // height: 380px;
+    // border-bottom: 1px solid #c3c9d0;
     .logo {
-        width: 700px;
-        height: 306px;
+        width: 700px; // height: 306px;
         overflow: hidden;
+
         img {
             width: 100%;
         }
     }
+
     .title {
         font-weight: normal;
-        padding: 25px 30px 10px;
-        font-size: 30px;
+        padding: 50px 0 20px 0;
+        text-align: center;
+        font-size: 32px;
     }
 }

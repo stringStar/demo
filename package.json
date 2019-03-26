@@ -36,5 +36,8 @@
     "dva": "^2.4.1",
     "react-helmet": "^5.2.0",
     "react-side-effect": "^1.1.5"
+  },
+  "theme": {
+    "@hd": "2px"
   }
 }

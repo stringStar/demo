@@ -8,6 +8,7 @@ import { createForm } from "rc-form";
 import * as API from "../service";
 
 const CheckboxItem = Checkbox.CheckboxItem;
+const logo = require("../assets/logo.png");
 
 @createForm()
 export default class Home extends Component {
@@ -15,12 +16,13 @@ export default class Home extends Component {
     card: [],
     loan: [],
     courseList: [
-      { id: "1", name: "课程1" },
-      { id: "2", name: "课程2" },
-      { id: "3", name: "课程3" },
-      { id: "4", name: "课程4" },
-      { id: "5", name: "课程5" },
-      { id: "6", name: "课程6" }
+      { id: "1", name: "LT 泄漏检测 Level-Ⅱ" },
+      { id: "2", name: "ET 涡流检测 Level-Ⅱ" },
+      { id: "3", name: "RT 射线检测 Level-Ⅱ" },
+      { id: "4", name: "UT 超声检测 Level-Ⅱ" },
+      { id: "5", name: "PT 渗透检测 Level-Ⅱ" },
+      { id: "6", name: "MT 磁粉检测 Level-Ⅱ" },
+      { id: "7", name: "VT 目视检测 Level-Ⅱ" }
     ],
     course: []
   };
@@ -63,16 +65,23 @@ export default class Home extends Component {
       if (!error) {
         const { courseList } = this.state;
         const course = courseList.filter(v => v.checked).map(v => v.name);
-        if (course.length === 0) {
+        const { others = "" } = value;
+        const regOthers = others.trim();
+        delete value.others;
+        if (course.length === 0 && !regOthers) {
           Toast.info("请选择课程", 2, () => {}, false);
         } else {
           API.enroll({
             ...value,
             edu: value.edu.join(""),
-            course
+            course: regOthers ? [...course, regOthers] : course
           }).then(
             res => {
-              router.push("/success");
+              if (res.code == 0) {
+                router.push("/success");
+              } else {
+                Toast.info(res.info, 2, () => {}, false);
+              }
             },
             rej => {
               Toast.info(rej.message, 2, () => {}, false);
@@ -103,15 +112,17 @@ export default class Home extends Component {
       <div className={styles.index}>
         <div className={styles.head}>
           <div className={styles.logo}>
-            <img src="https://pub-files.jinshuju.net/hi/20180426153519_0b9af4@himlarge" />
+            <img src={logo} />
           </div>
           <h1 className={styles.title}>
-            德国莱茵欧标美标NDT无损检测2019课程报名
+            中广核检测欧标NDT无损检测2019课程报名
           </h1>
         </div>
         <div className={styles.content}>
           <div className={styles.formItem}>
-            <label>学员姓名</label>
+            <label>
+              <span className={styles.require}>*</span>学员姓名
+            </label>
             <InputItem
               {...getFieldProps("name", {
                 rules: [{ required: true, message: "请输入姓名" }]
@@ -121,7 +132,9 @@ export default class Home extends Component {
             />
           </div>
           <div className={styles.formItem}>
-            <label>公司</label>
+            <label>
+              <span className={styles.require}>*</span>公司
+            </label>
             <InputItem
               {...getFieldProps("company", {
                 rules: [{ required: true, message: "请输入公司名" }]
@@ -131,7 +144,9 @@ export default class Home extends Component {
             />
           </div>
           <div className={styles.formItem}>
-            <label>学员手机</label>
+            <label>
+              <span className={styles.require}>*</span>学员手机
+            </label>
             <InputItem
               clear
               {...getFieldProps("mobile", {
@@ -142,7 +157,9 @@ export default class Home extends Component {
           </div>
 
           <div className={styles.formItem}>
-            <label>学历</label>
+            <label>
+              <span className={styles.require}>*</span>学历
+            </label>
             <div className={styles.eduList}>
               <Picker
                 data={eduList}
@@ -159,7 +176,9 @@ export default class Home extends Component {
               </Picker>
             </div>
           </div>
-          <div className={styles.courseTitle}>报名课程</div>
+          <div className={styles.courseTitle}>
+            <span className={styles.require}>*</span>报名课程
+          </div>
           <div className={styles.courseList}>
             {courseList &&
               courseList.map(i => (
@@ -171,6 +190,11 @@ export default class Home extends Component {
                   {i.name}
                 </CheckboxItem>
               ))}
+            <InputItem
+              clear
+              {...getFieldProps("others")}
+              placeholder="其它（自己填写）"
+            />
           </div>
         </div>
         <div className={styles.sumbit}>

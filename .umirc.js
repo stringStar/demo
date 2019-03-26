@@ -9,7 +9,7 @@ export default {
         antd: false,
         dva: false,
         dynamicImport: false,
-        title: "小金桔",
+        title: "中广核检测欧标NDT无损检测2019课程报名",
         dll: false,
         hardSource: false,
         routes: {
@@ -21,7 +21,10 @@ export default {
   ],
   history: "browser",
   hash: true,
-  extraBabelPlugins: [["import", { libraryName: "antd-mobile", style: "css" }]],
+  extraBabelPlugins: [["import", { libraryName: "antd-mobile", style: true }]],
+  theme: {
+    hd: "2px"
+  },
   extraPostCSSPlugins: [],
   proxy: {
     "/api": {

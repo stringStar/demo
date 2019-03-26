@@ -2,7 +2,8 @@ html,
 body,
 #root {
     height: 100%;
-    font-family: 'Microsoft YaHei', 'Open Sans', 'PingFang SC', 'Helvetica Neue', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', Arial, sans-serif;
+    font-family: "Arial", "Microsoft YaHei", "Open Sans", "PingFang SC",
+        "Helvetica Neue", "Hiragino Sans GB", "WenQuanYi Micro Hei", sans-serif;
 }
 
 * {
